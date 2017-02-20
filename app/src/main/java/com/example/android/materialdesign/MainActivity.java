@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer,(DrawerLayout) findViewById(R.id.drawer_layout),toolbar);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -56,21 +56,22 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             Toast.makeText(this, "Hey you just hit " + item.getTitle(), Toast.LENGTH_SHORT).show();
             return true;
         }
 
-        if(id == R.id.navigate){
-            startActivity(new Intent(this,SubActivity.class));
+        if (id == R.id.navigate) {
+            startActivity(new Intent(this, SubActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    class MyPagerAdapter extends FragmentPagerAdapter{
+    class MyPagerAdapter extends FragmentPagerAdapter {
 
         String[] tabs;
+
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
             tabs = getResources().getStringArray(R.array.tabs);
@@ -93,12 +94,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static class MyFragment extends Fragment{
+    public static class MyFragment extends Fragment {
         private TextView textView;
-        public static MyFragment getInstance(int position){
+
+        public static MyFragment getInstance(int position) {
             MyFragment myFragment = new MyFragment();
             Bundle args = new Bundle();
-            args.putInt("position",position);
+            args.putInt("position", position);
             myFragment.setArguments(args);
             return myFragment;
         }
@@ -106,10 +108,10 @@ public class MainActivity extends AppCompatActivity {
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View layout =inflater.inflate(R.layout.fragment_my,container,false);
+            View layout = inflater.inflate(R.layout.fragment_my, container, false);
             textView = (TextView) layout.findViewById(R.id.position);
             Bundle bundle = getArguments();
-            if(bundle!= null){
+            if (bundle != null) {
                 textView.setText("The page selected is " + bundle.getInt("position"));
             }
             return layout;
